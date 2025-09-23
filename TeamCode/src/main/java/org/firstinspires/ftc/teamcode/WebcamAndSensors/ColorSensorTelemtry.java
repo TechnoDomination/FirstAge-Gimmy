@@ -38,12 +38,12 @@ public class ColorSensorTelemtry {
             green = 0, 0, 9>=
              */
 
-            if(normRed = 2.25 && normGreen = 0 && normBlue = 2.25){
-                return detectedColor.PURPLE
+            if(normRed == 2.25 && normGreen == 0 && normBlue == 2.25){
+                return detectedColor.PURPLE;
             }
 
-            else if(normRed = 0 && normGreen = 9 && normBlue = 0)){
-                return detectedColor.GREEN
+            else if(normRed == 0 && normGreen == 9 && normBlue == 0){
+                return detectedColor.GREEN;
             }
             else{
                 return detectedColor.UNKNOWN;
