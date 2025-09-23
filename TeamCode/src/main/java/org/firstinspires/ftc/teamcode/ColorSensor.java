@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+@TeleOp(name = "ColorSensor", group = "Sensor")
 public class ColorSensor extends OpMode {
 ColorSensorTelemtry sensor = new ColorSensorTelemtry();
 

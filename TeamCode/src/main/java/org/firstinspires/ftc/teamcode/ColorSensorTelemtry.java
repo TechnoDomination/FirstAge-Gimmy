@@ -30,6 +30,7 @@ public class ColorSensorTelemtry {
             telemetry.addData("red", normRed);
             telemetry.addData("blue", normBlue);
             telemetry.addData("green", normGreen); // telemtry for the diffrent color balls.
+            telemetry.update();
 
             return detectedColor.UNKNOWN;
 
