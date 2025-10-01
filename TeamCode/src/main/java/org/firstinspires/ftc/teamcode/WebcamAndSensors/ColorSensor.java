@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 @TeleOp(name = "ColorSensor", group = "Sensor")
 public class ColorSensor extends OpMode {
 ColorSensorTelemtry sensor = new ColorSensorTelemtry();
+ColorSensorTelemtry.detectedColor detectedColor;
 
     @Override
     public void init() {
@@ -15,6 +16,8 @@ ColorSensorTelemtry sensor = new ColorSensorTelemtry();
 
     @Override
     public void loop() {
-    sensor.getDetectedColor(telemetry);
+     detectedColor = sensor.getDetectedColor(telemetry);
+     telemetry.addData("Color detected: " , detectedColor);
+     telemetry.update();
     }
 }
