@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Subsystems.Drive;
+import org.firstinspires.ftc.teamcode.Subsystems.Hopper;
 import org.firstinspires.ftc.teamcode.Subsystems.Shooter;
 
 @TeleOp(name = "TeleOp", group = "TeleOp")
