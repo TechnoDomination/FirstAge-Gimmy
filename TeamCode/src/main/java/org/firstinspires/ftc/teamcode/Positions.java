@@ -15,7 +15,8 @@ public enum Positions {
 
     //Auto Blue Goal - LOCALIZER = x:-47.4, y:56.3, rotation:-PI*0.95
     MoveOutTriangleBlueGoal(new Vector2d(-50.5, 29.3), 0.0),
-    ShootingPositionsBlue(new Vector2d(-26.2, 47.4), PI*0.67);
+    ShootingPositionsBlue(new Vector2d(-26.2, 47.4), PI*0.67),
+    MoveForward(new Vector2d(0, 10), 0.0);
 
     Positions(Vector2d vector, Double rotation) {
         runToExact = new P2P(vector, rotation);
