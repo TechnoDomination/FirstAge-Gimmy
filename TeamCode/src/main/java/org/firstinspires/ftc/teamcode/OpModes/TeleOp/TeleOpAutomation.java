@@ -35,7 +35,7 @@ public class TeleOpAutomation extends LinearOpMode {
         }
         if (gamepad1.x) {
             while (gamepad1.x) {
-                shooter.ShooterMotor.setPower(0.5);
+                shooter.ShooterMotor.setPower(0.65);
             }
         }
 
