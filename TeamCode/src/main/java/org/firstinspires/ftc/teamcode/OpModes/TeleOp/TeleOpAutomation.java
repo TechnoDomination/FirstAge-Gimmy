@@ -18,18 +18,28 @@ public class TeleOpAutomation extends LinearOpMode {
         drive.update(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
         //shooter
-        if (gamepad1.right_bumper) {
-            while (gamepad1.right_bumper) {
-             shooter.ShooterMotor.setPower(0.85);
+        if (gamepad1.a) {
+            while (gamepad1.a) {
+             shooter.ShooterMotor.setPower(0.4);
+            }
+        }
+        if (gamepad1.b) {
+            while (gamepad1.b) {
+                shooter.ShooterMotor.setPower(0.15);
+            }
+        }
+        if (gamepad1.y) {
+            while (gamepad1.y) {
+                shooter.ShooterMotor.setPower(0.57);
+            }
+        }
+        if (gamepad1.x) {
+            while (gamepad1.x) {
+                shooter.ShooterMotor.setPower(0.5);
             }
         }
 
-        //hopper
-        if (gamepad1.left_bumper) {
-            while (gamepad1.left_bumper) {
-                hopper.HopperMotor.setPower(0.85);
-            }
-        }
+
 
     }
 }
