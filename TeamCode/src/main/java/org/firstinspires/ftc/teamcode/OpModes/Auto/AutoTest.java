@@ -1,3 +1,4 @@
+package org.firstinspires.ftc.teamcode.OpModes.Auto;
 import static java.lang.Math.PI;
 
 import android.app.Notification;
@@ -11,20 +12,24 @@ import org.firstinspires.ftc.teamcode.GoBildaPinPointOdo.Localizer;
 import org.firstinspires.ftc.teamcode.GoBildaPinPointOdo.Poses;
 import org.firstinspires.ftc.teamcode.Positions;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive;
-import com.acmerobotics.roadrunner.ftc.Action;
+import com.acmerobotics.roadrunner.ftc.Actions;
 
 @Autonomous(name = "AutoTest", group = "Auto")
 public class AutoTest extends LinearOpMode {
     @Override
     public void runOpMode() {
-        Localizer localizer = new Localizer(hardwareMap, new Poses(48, 55.7, PI * 0.95));
+        Localizer localizer = new Localizer(hardwareMap, new Poses(0, 0, 0.0));
         Drive drive = new Drive(hardwareMap);
 
         waitForStart();
-        Action.runBlocking(
+        Actions.runBlocking(
                 new ParallelAction (
                 telemetryPacket -> {
                     localizer.update();
+                    telemetry.addData("X pos", Localizer.pose.getX());
+                    telemetry.addData("Y pos", Localizer.pose.getY());
+                    telemetry.addData("Heading pos", Localizer.pose.getHeading());
+                    telemetry.update();
                     return true;
                 },
 
