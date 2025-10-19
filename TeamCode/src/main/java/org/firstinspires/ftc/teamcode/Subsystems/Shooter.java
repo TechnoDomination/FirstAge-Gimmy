@@ -13,7 +13,7 @@ public class Shooter {
     public DcMotorEx ShooterMotor;
 
     public Shooter (HardwareMap hardwareMap){
-        ShooterMotor = hardwareMap.get(DcMotorEx.class, "FrontLeftDCMotor");
+        ShooterMotor = hardwareMap.get(DcMotorEx.class, "ShooterMotor");
         ShooterMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         ShooterMotor.setPower(0);
         ShooterMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

@@ -23,7 +23,7 @@ public class Hopper {
     public void update() {
         switch (state) {
             case UP:
-                HopperServo.setPosition(0.5);
+                HopperServo.setPosition(0.6);
                 break;
             case DOWN:
                 HopperServo.setPosition(0);
@@ -32,8 +32,23 @@ public class Hopper {
                 HopperServo.setPosition(0);
                 break;
         }
+
+        if (state == State.UP && HopperServo.getPosition() == 0.5) {
+            isTargetReached = true;
+        } else if (state == State.DOWN && HopperServo.getPosition() == 0) {
+            isTargetReached = true;
+        } else if (state == State.REST && HopperServo.getPosition() == 0) {
+            isTargetReached = true;
+        } else {
+            isTargetReached = false;
+        }
     }
 
-
+    public String getClawTelemetry() {
+        String telemetry = "";
+        telemetry = telemetry + "\n Hopper Pos = " + HopperServo.getPosition();
+        telemetry = telemetry + "\n ";
+        return telemetry;
+    }
 
 }

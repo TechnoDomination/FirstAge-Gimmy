@@ -15,31 +15,38 @@ public class TeleOpAutomation extends LinearOpMode {
         Shooter shooter = new Shooter(hardwareMap);
         Hopper hopper = new Hopper(hardwareMap);
         waitForStart();
-        drive.update(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+        while (opModeIsActive() && !isStopRequested()) {
+            drive.update(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
-        //shooter
-        if (gamepad1.a) {
-            while (gamepad1.a) {
-             shooter.ShooterMotor.setPower(0.4);
+            //shooter
+            if (gamepad1.a) {
+                while (gamepad1.a) {
+                    shooter.ShooterMotor.setPower(0.4);
+                }
+            }
+            if (gamepad1.b) {
+                while (gamepad1.b) {
+                    shooter.ShooterMotor.setPower(0.15);
+                }
+            }
+            if (gamepad1.y) {
+                while (gamepad1.y) {
+                    shooter.ShooterMotor.setPower(0.57);
+                }
+            }
+            if (gamepad1.x) {
+                while (gamepad1.x) {
+                    shooter.ShooterMotor.setPower(0.65);
+                }
+            }
+
+            //hopper
+            if (gamepad1.right_bumper) {
+                hopper.state = Hopper.State.UP;
+            }
+            if (gamepad1.left_bumper) {
+                hopper.state = Hopper.State.DOWN;
             }
         }
-        if (gamepad1.b) {
-            while (gamepad1.b) {
-                shooter.ShooterMotor.setPower(0.15);
-            }
-        }
-        if (gamepad1.y) {
-            while (gamepad1.y) {
-                shooter.ShooterMotor.setPower(0.57);
-            }
-        }
-        if (gamepad1.x) {
-            while (gamepad1.x) {
-                shooter.ShooterMotor.setPower(0.65);
-            }
-        }
-
-
-
     }
 }
