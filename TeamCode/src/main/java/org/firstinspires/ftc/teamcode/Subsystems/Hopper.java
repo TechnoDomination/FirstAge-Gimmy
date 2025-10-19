@@ -1,22 +1,39 @@
 package org.firstinspires.ftc.teamcode.Subsystems;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Hopper {
-
+    private final Servo HopperServo;
+    public State state = State.REST;
+    public boolean isTargetReached = false;
     public static Hopper instance;
-    public DcMotorEx HopperMotor;
 
-    public Hopper (HardwareMap hardwareMap){
+    public enum State {
+        UP,
+        DOWN,
+        REST
+    }
 
-        HopperMotor = hardwareMap.get(DcMotorEx.class, "FrontLeftDcMotor");
-        HopperMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        HopperMotor.setPower(0);
-        HopperMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    public Hopper (HardwareMap hardwareMap) {
+        HopperServo = hardwareMap.get(Servo.class, "HopperServo");
+
         instance = this;
     }
+    public void update() {
+        switch (state) {
+            case UP:
+                HopperServo.setPosition(0.5);
+                break;
+            case DOWN:
+                HopperServo.setPosition(0);
+                break;
+            case REST:
+                HopperServo.setPosition(0);
+                break;
+        }
+    }
+
 
 
 }
