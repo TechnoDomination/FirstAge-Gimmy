@@ -10,24 +10,24 @@ import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 
 import java.util.Locale;
 
-@Disabled
+
 @TeleOp(name="goBILDA® PinPoint Odometry Example", group="Linear OpMode")
 
 
 public class PinpointTest extends LinearOpMode {
 
-    GoBildaPinpointDriver odo; // Declare OpMode member for the Odometry Computer
+    GoBildaPinPointDriver odo; // Declare OpMode member for the Odometry Computer
     double oldTime = 0;
 
     @Override
     public void runOpMode() {
 
-        telemetry = FtcDashboard.getInstance().getTelemetry();
+        //telemetry = FtcDashboard.getInstance().getTelemetry();
 
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
 
-        odo = hardwareMap.get(GoBildaPinpointDriver.class,"odo");
+        odo = hardwareMap.get(GoBildaPinPointDriver.class,"odo");
 
         /*
         Set the odometry pod positions relative to the point that the odometry computer tracks around.
@@ -37,15 +37,15 @@ public class PinpointTest extends LinearOpMode {
         the tracking point the Y (strafe) odometry pod is. forward of center is a positive number,
         backwards is a negative number.
          */
-        odo.setOffsets(-6*25.4, 4*25.4); //these are tuned for 3110-0002-0001 Product Insight #1
-
+        //odo.setOffsets(-6*25.4, 4*25.4); //these are tuned for 3110-0002-0001 Product Insight #1
+        odo.setOffsets(-3.0*25.4, -4.3*25.4);
         /*
         Set the kind of pods used by your robot. If you're using goBILDA odometry pods, select either
         the goBILDA_SWINGARM_POD, or the goBILDA_4_BAR_POD.
         If you're using another kind of odometry pod, uncomment setEncoderResolution and input the
         number of ticks per mm of your odometry pod.
          */
-        odo.setEncoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
+        odo.setEncoderResolution(GoBildaPinPointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
         //odo.setEncoderResolution(13.26291192);
 
 
@@ -54,7 +54,7 @@ public class PinpointTest extends LinearOpMode {
         increase when you move the robot forward. And the Y (strafe) pod should increase when
         you move the robot to the left.
          */
-        odo.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.FORWARD, GoBildaPinpointDriver.EncoderDirection.FORWARD);
+        odo.setEncoderDirections(GoBildaPinPointDriver.EncoderDirection.FORWARD, GoBildaPinPointDriver.EncoderDirection.FORWARD);
 
 
         /*

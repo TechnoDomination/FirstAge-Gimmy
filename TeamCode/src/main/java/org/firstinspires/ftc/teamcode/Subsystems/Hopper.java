@@ -8,6 +8,9 @@ public class Hopper {
     public State state = State.REST;
     public boolean isTargetReached = false;
     public static Hopper instance;
+    private final double upPos = 0.25;
+    private final double downPos = 1;
+    private final double restPos = 1;
 
     public enum State {
         UP,
@@ -23,28 +26,28 @@ public class Hopper {
     public void update() {
         switch (state) {
             case UP:
-                HopperServo.setPosition(0.6);
+                HopperServo.setPosition(upPos);
                 break;
             case DOWN:
-                HopperServo.setPosition(0);
+                HopperServo.setPosition(downPos);
                 break;
             case REST:
-                HopperServo.setPosition(0);
+                HopperServo.setPosition(restPos);
                 break;
         }
 
-        if (state == State.UP && HopperServo.getPosition() == 0.5) {
+        if (state == State.UP && HopperServo.getPosition() == upPos) {
             isTargetReached = true;
-        } else if (state == State.DOWN && HopperServo.getPosition() == 0) {
+        } else if (state == State.DOWN && HopperServo.getPosition() == downPos) {
             isTargetReached = true;
-        } else if (state == State.REST && HopperServo.getPosition() == 0) {
+        } else if (state == State.REST && HopperServo.getPosition() == downPos) {
             isTargetReached = true;
         } else {
             isTargetReached = false;
         }
     }
 
-    public String getClawTelemetry() {
+    public String getHopperTelemetry() {
         String telemetry = "";
         telemetry = telemetry + "\n Hopper Pos = " + HopperServo.getPosition();
         telemetry = telemetry + "\n ";
