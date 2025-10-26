@@ -41,7 +41,7 @@ public class P2P implements Action {
         //field oriented drive
         double h = -robotPosition.getHeading();
         double rotX = axial * Math.cos(h) - lateral * Math.sin(h);
-        double rotY = -(axial * Math.sin(h) + lateral * Math.cos(h));
+        double rotY = axial * Math.sin(h) + lateral * Math.cos(h);
 
         motorController.FrontLeftDCMotor.setPower(rotY + rotX + turn);
         motorController.BackLeftDCMotor.setPower(rotY - rotX + turn);

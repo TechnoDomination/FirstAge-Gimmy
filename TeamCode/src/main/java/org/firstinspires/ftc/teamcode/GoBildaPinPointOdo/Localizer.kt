@@ -25,7 +25,7 @@ class Localizer (hwmap: HardwareMap, private val offset: Poses){
          */
 
         odo.setEncoderDirections(
-            GoBildaPinPointDriver.EncoderDirection.FORWARD,
+            GoBildaPinPointDriver.EncoderDirection.REVERSED,
             GoBildaPinPointDriver.EncoderDirection.FORWARD
         )
 

@@ -18,7 +18,7 @@ public class AutoStartBlueGoal extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        Localizer localizer = new Localizer(hardwareMap, new Poses(-58, -50, 0));
+        Localizer localizer = new Localizer(hardwareMap, new Poses(-40, 50, 0.0));
         Drive drive = new Drive(hardwareMap);
 
         waitForStart();
@@ -31,7 +31,7 @@ public class AutoStartBlueGoal extends LinearOpMode {
 
                             telemetry.addData("X pos", Localizer.pose.getX());
                             telemetry.addData("Y pos", Localizer.pose.getY());
-                            telemetry.addData("Heading pos", Localizer.pose.getHeading());
+                            telemetry.addData("Heading pos",- Localizer.pose.getHeading());
                             //for(String string: customActions.getTelemetry()) telemetry.addLine(string);
                             telemetry.update();
 
@@ -41,7 +41,11 @@ public class AutoStartBlueGoal extends LinearOpMode {
 
         new SequentialAction(
                 Positions.MoveOutTriangleBlueGoal.runToExact,
-                new SleepAction(0.5)
+                new SleepAction(0.5),
+                Action -> {
+                    drive.stopDrive();
+                    return false;
+                }
 
                      )
                 )
