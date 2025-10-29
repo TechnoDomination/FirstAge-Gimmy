@@ -18,7 +18,7 @@ public class AutoStartBlueGoal extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        Localizer localizer = new Localizer(hardwareMap, new Poses(-50, 60, 0.0));
+        Localizer localizer = new Localizer(hardwareMap, new Poses(-50, 60, -PI*0.95));
         Drive drive = new Drive(hardwareMap);
 
         waitForStart();
@@ -40,7 +40,9 @@ public class AutoStartBlueGoal extends LinearOpMode {
 
 
         new SequentialAction(
-                Positions.MoveOutTriangleBlueGoal.runToExact,
+                Positions.MoveRightBlueGoal.runToExact,
+                new SleepAction(0.5),
+                Positions.ShootingPositionsBlue.runToExact,
                 new SleepAction(0.5),
                 Action -> {
                     drive.stopDrive();

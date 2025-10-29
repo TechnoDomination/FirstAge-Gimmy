@@ -13,7 +13,6 @@ import org.firstinspires.ftc.teamcode.GoBildaPinPointOdo.Localizer;
 import org.firstinspires.ftc.teamcode.GoBildaPinPointOdo.Poses;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive;
 import org.firstinspires.ftc.teamcode.PIDF.PIDFParams;
-import org.firstinspires.ftc.teamcode.Positions;
 
 @Config
 @TeleOp (name = "Drive Tuning", group = "Tuning OpModes")
@@ -47,7 +46,7 @@ public class DriveTuning extends LinearOpMode {
                             return true;
                         },
                         new SequentialAction(
-                                Positions.MoveOutTriangleBlueGoal.runToExact,
+                                Positions.MoveRightBlueGoal.runToExact,
                                 // customActions.intakeForeArmSubEdge,
                                 //  new SleepAction(1),
                                 new SleepAction(1),
