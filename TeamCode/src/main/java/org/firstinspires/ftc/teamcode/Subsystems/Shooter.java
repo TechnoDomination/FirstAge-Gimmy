@@ -15,9 +15,17 @@ public class Shooter {
 
     public Shooter (HardwareMap hardwareMap){
         ShooterMotor = hardwareMap.get(DcMotorEx.class, "ShooterMotor");
-        ShooterMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        //ShooterMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        ShooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        ShooterMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         ShooterMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         instance = this;
+    }
+
+    public void setVelocityRPM(double targetRPM) {
+        // Prevent setting a velocity above the motor's capability.
+
+        // Convert RPM to ticks per second.
+        double targetVelocityTPS = (targetRPM / 60) * 28;
+        ShooterMotor.setVelocity(targetVelocityTPS);
     }
 }

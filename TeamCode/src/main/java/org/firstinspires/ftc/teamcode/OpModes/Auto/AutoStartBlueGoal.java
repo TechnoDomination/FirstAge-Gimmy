@@ -18,7 +18,7 @@ public class AutoStartBlueGoal extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        Localizer localizer = new Localizer(hardwareMap, new Poses(-40, 50, 0.0));
+        Localizer localizer = new Localizer(hardwareMap, new Poses(-50, 60, 0.0));
         Drive drive = new Drive(hardwareMap);
 
         waitForStart();
