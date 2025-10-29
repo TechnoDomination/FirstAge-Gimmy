@@ -27,5 +27,12 @@ public class Shooter {
         // Convert RPM to ticks per second.
         double targetVelocityTPS = (targetRPM / 60) * 28;
         ShooterMotor.setVelocity(targetVelocityTPS);
+
+    }
+
+    public void zero(){
+
+        ShooterMotor.setPower(0);
     }
 }
+
