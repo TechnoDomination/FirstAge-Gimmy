@@ -12,24 +12,27 @@ public class Shooter {
 
 
     public static Shooter instance;
-    public DcMotorEx ShooterMotorTwo;
-    public DcMotorEx ShooterMotorOne;
+    public DcMotorEx ShooterMotorLeft;
+    public DcMotorEx ShooterMotorRight;
     DcMotorEx motorExLeft;
     public boolean isVelReached = false;
-
+    public static final double NEW_P = 1.0;
+    public static final double NEW_I = 0.0;
+    public static final double NEW_D = 0.0;
+    public static final double NEW_F = 0.0;
     public void PIDFCoefficients(){
         PIDFCoefficients pidfOrig = motorExLeft.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
-
+        PIDFCoefficients pidfNew = new PIDFCoefficients(NEW_P, NEW_I, NEW_D, NEW_F);
     }
     public Shooter (HardwareMap hardwareMap){
-        ShooterMotorOne = hardwareMap.get(DcMotorEx.class, "ShooterMotor One");
-        ShooterMotorTwo = hardwareMap.get(DcMotorEx.class, "ShooterMotor Two");
-        ShooterMotorOne.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        ShooterMotorTwo.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        ShooterMotorOne.setDirection(DcMotorSimple.Direction.FORWARD);
-        ShooterMotorTwo.setDirection(DcMotorSimple.Direction.REVERSE);
-        ShooterMotorOne.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        ShooterMotorTwo.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        ShooterMotorLeft = hardwareMap.get(DcMotorEx.class, "ShooterMotorLeft");
+        ShooterMotorRight = hardwareMap.get(DcMotorEx.class, "ShooterMotorRight");
+        ShooterMotorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        ShooterMotorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        ShooterMotorLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+        ShooterMotorRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        ShooterMotorLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        ShooterMotorRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         instance = this;
     }
 
@@ -37,8 +40,8 @@ public class Shooter {
         // Prevent setting a velocity above the motor's capability.
         // Convert RPM to ticks per second.
         double targetVelocityTPS = (targetRPM / 60) * 28;
-        ShooterMotorOne.setVelocity(targetVelocityTPS);
-        ShooterMotorTwo.setVelocity(targetVelocityTPS);
+        ShooterMotorLeft.setVelocity(targetVelocityTPS);
+        ShooterMotorRight.setVelocity(targetVelocityTPS);
     }
 
 
