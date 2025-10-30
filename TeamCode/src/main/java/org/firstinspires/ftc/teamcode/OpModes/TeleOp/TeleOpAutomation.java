@@ -32,7 +32,8 @@ public class TeleOpAutomation extends LinearOpMode {
         Hopper hopper = new Hopper(hardwareMap);
 
 
-        shooter.ShooterMotor.setPower(0.0);
+        shooter.ShooterMotorOne.setPower(0.0);
+        shooter.ShooterMotorTwo.setPower(0.0);
 
 
         waitForStart();
@@ -47,30 +48,23 @@ public class TeleOpAutomation extends LinearOpMode {
 
             //shooter
             if (gamepad1.a) {
-                shooter.ShooterMotor.setPower(0); //setPower(0)
+                shooter.ShooterMotorOne.setPower(0);//setPower(0)
+                shooter.ShooterMotorTwo.setPower(0);
             }
             if (gamepad1.b) {
-
-
                 shooter.setVelocityRPM(2000);//setPower(0.47)
-
-
-
-
             }
             if (gamepad1.y) {
                 shooter.setVelocityRPM(3500);
             }
             if (gamepad1.x) {
-
-
-                shooter.ShooterMotor.setVelocity(velocityX); //setPower(0.7)
-                desiredRPM = 4200;
-                velocityX = (desiredRPM / 60.0) * ticksPerRev;
+                shooter.setVelocityRPM(4200); //setPower(0.7)
+                shooter.setVelocityRPM(4200);
             }
 
 
-            telemetry.addData("Shooter Power:", shooter.ShooterMotor.getVelocity());
+            telemetry.addData("Shooter Power For Motor One:", shooter.ShooterMotorOne.getVelocity());
+            telemetry.addData("Shooter Power For Motor Two:", shooter.ShooterMotorTwo.getVelocity());
             telemetry.update();
             //hopper
             if (gamepad1.right_bumper) {
