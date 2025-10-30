@@ -5,43 +5,43 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
-
-import org.firstinspires.ftc.teamcode.PIDF.PIDFController;
-import org.firstinspires.ftc.teamcode.PIDF.PIDFParams;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 
 public class Shooter {
 
 
     public static Shooter instance;
-    public DcMotorEx ShooterMotor;
+    public DcMotorEx ShooterMotorTwo;
+    public DcMotorEx ShooterMotorOne;
+    DcMotorEx motorExLeft;
+    public boolean isVelReached = false;
 
+    public void PIDFCoefficients(){
+        PIDFCoefficients pidfOrig = motorExLeft.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
 
+    }
     public Shooter (HardwareMap hardwareMap){
-        ShooterMotor = hardwareMap.get(DcMotorEx.class, "ShooterMotor");
-        ShooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        ShooterMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        ShooterMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        ShooterMotorOne = hardwareMap.get(DcMotorEx.class, "ShooterMotor One");
+        ShooterMotorTwo = hardwareMap.get(DcMotorEx.class, "ShooterMotor Two");
+        ShooterMotorOne.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        ShooterMotorTwo.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        ShooterMotorOne.setDirection(DcMotorSimple.Direction.FORWARD);
+        ShooterMotorTwo.setDirection(DcMotorSimple.Direction.REVERSE);
+        ShooterMotorOne.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        ShooterMotorTwo.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         instance = this;
     }
 
-
     public void setVelocityRPM(double targetRPM) {
         // Prevent setting a velocity above the motor's capability.
-
-
         // Convert RPM to ticks per second.
         double targetVelocityTPS = (targetRPM / 60) * 28;
-        ShooterMotor.setVelocity(targetVelocityTPS);
+        ShooterMotorOne.setVelocity(targetVelocityTPS);
+        ShooterMotorTwo.setVelocity(targetVelocityTPS);
+    }
+
 
 
     }
 
-
-    public void zero(){
-
-
-        ShooterMotor.setPower(0);
-    }
-}
