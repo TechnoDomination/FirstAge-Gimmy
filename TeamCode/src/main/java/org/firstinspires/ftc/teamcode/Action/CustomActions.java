@@ -43,12 +43,12 @@ public class CustomActions {
         }
     };
 
-    public Action shooterButtonY = new Action() {
+    public Action shootMiddle = new Action() {
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            shooter.ShooterMotorOne.setPower(0.57);
 
-
-            return true;
+            return !shooter.isVelReached;
         }
     };
 
