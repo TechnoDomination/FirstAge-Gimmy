@@ -13,6 +13,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class CustomActions {
     Shooter shooter = Shooter.instance;
     Hopper hopper = Hopper.instance;
+    public Drive drive = Drive.instance;
     public static CustomActions instance;
 
     public CustomActions(HardwareMap hardwareMap) {
@@ -22,6 +23,16 @@ public class CustomActions {
     public void update() {
         hopper.update();
     }
+
+    public Action stopDrive = new Action() {
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+
+            drive.stopDrive();
+
+            return false;
+        }
+    };
 
     public Action hopperUp = new Action() {
 
@@ -46,7 +57,16 @@ public class CustomActions {
     public Action shootMiddle = new Action() {
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-            shooter.ShooterMotorOne.setPower(0.57);
+            shooter.setVelocityRPM(3100);
+
+            return !shooter.isVelReached;
+        }
+    };
+
+    public Action stopShooter = new Action() {
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            shooter.stopMotor();
 
             return !shooter.isVelReached;
         }

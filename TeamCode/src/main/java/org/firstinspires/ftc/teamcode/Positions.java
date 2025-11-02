@@ -10,12 +10,14 @@ import org.firstinspires.ftc.teamcode.Action.P2P;
 public enum Positions {
 
     //Auto Red Goal - LOCALIZER = x:48, y:55, rotation:PI*0.95
-    MoveOutTriangleRedGoal(new Vector2d(30, 30), PI*.25),
-    ShootingPositionRed(new Vector2d(0, 0), PI*0.8),
+    MoveOutTriangleRedGoal(new Vector2d(40, 15), PI*.25),
+    ShootingPositionsRed(new Vector2d(35, 35), PI*0.25),
+    ParkPositionsRed(new Vector2d(60, 25), PI*0.25),
 
     //Auto Blue Goal - LOCALIZER = x:-47.4, y:56.3, rotation:-PI*0.95
     MoveRightBlueGoal(new Vector2d(-13 , 55.8), 0.0),
-    ShootingPositionsBlue(new Vector2d(0, 0), PI*0.67),
+    ShootingPositionsBlue(new Vector2d(-35, 15), PI*-0.25),
+    ParkPositionsBlue(new Vector2d(-60, 15), PI*-0.25),
     MoveForward(new Vector2d(0,  10), 0.0);
 
     Positions(Vector2d vector, Double rotation) {

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.OpModes.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 
 import org.firstinspires.ftc.teamcode.Subsystems.Drive;
@@ -32,8 +33,6 @@ public class TeleOpAutomation extends LinearOpMode {
         Hopper hopper = new Hopper(hardwareMap);
 
 
-        //shooter.ShooterMotorLeft.setPower(0.0);
-        shooter.ShooterMotorRight.setPower(0.0);
 
 
         waitForStart();
@@ -48,22 +47,23 @@ public class TeleOpAutomation extends LinearOpMode {
 
             //shooter
             if (gamepad1.a) {
-                //shooter.ShooterMotorLeft.setPower(0);//setPower(0)
-                shooter.ShooterMotorRight.setPower(0);
+                shooter.stopMotor();
             }
             if (gamepad1.b) {
-                shooter.setVelocityRPM(2000);//setPower(0.47)
+                shooter.setVelocityRPM(3600);//setPower(0.47)
+
             }
             if (gamepad1.y) {
-                shooter.setVelocityRPM(3500);
+                shooter.setVelocityRPM(3100);
             }
             if (gamepad1.x) {
-                shooter.setVelocityRPM(4200); //setPower(0.7)
+                //shooter.setVelocityRPM(4000); //setPower(0.7)
             }
 
 
-            //telemetry.addData("Shooter Power For Motor One:", shooter.ShooterMotorLeft.getVelocity());
-            telemetry.addData("Shooter Power For Motor Two:", shooter.ShooterMotorRight.getVelocity());
+            telemetry.addData("Shooter Power For Left Motor:", shooter.ShooterMotorLeft.getVelocity());
+            telemetry.addData("Shooter Power For Right Motor:", shooter.ShooterMotorRight.getVelocity());
+            telemetry.addData("Left PIDFCoeff : ", shooter.ShooterMotorLeft.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER));
             telemetry.update();
             //hopper
             if (gamepad1.right_bumper) {

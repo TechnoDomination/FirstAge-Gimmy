@@ -15,24 +15,23 @@ public class Shooter {
     public DcMotorEx ShooterMotorLeft;
     public DcMotorEx ShooterMotorRight;
     DcMotorEx motorExLeft;
-    public boolean isVelReached = false;
-    public static final double NEW_P = 1.0;
+    public boolean isVelReached = true;
+    public static final double NEW_P = 50.0;
     public static final double NEW_I = 0.0;
     public static final double NEW_D = 0.0;
-    public static final double NEW_F = 0.0;
-    public void PIDFCoefficients(){
-        PIDFCoefficients pidfOrig = motorExLeft.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
-        PIDFCoefficients pidfNew = new PIDFCoefficients(NEW_P, NEW_I, NEW_D, NEW_F);
-    }
+    public static final double NEW_F = 0.000357;
+    PIDFCoefficients pidfNew = new PIDFCoefficients(NEW_P, NEW_I, NEW_D, NEW_F);
+
     public Shooter (HardwareMap hardwareMap){
         ShooterMotorLeft = hardwareMap.get(DcMotorEx.class, "ShooterMotorLeft");
         ShooterMotorRight = hardwareMap.get(DcMotorEx.class, "ShooterMotorRight");
         ShooterMotorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        ShooterMotorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //ShooterMotorRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         ShooterMotorLeft.setDirection(DcMotorSimple.Direction.FORWARD);
-        ShooterMotorRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        //ShooterMotorRight.setDirection(DcMotorSimple.Direction.REVERSE);
         ShooterMotorLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        ShooterMotorRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //ShooterMotorRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        ShooterMotorLeft.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER,pidfNew);
         instance = this;
     }
 
@@ -41,9 +40,18 @@ public class Shooter {
         // Convert RPM to ticks per second.
         double targetVelocityTPS = (targetRPM / 60) * 28;
         ShooterMotorLeft.setVelocity(targetVelocityTPS);
-        ShooterMotorRight.setVelocity(targetVelocityTPS);
+        //ShooterMotorRight.setVelocity(targetVelocityTPS);
     }
 
+    public void stopMotor(){
+        ShooterMotorLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        ShooterMotorLeft.setPower(0.0);
+        //ShooterMotorRight.setPower(0.0);
+    }
+
+    public void setPower(){
+        ShooterMotorLeft.setPower(0.75);
+    }
 
 
     }
