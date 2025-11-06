@@ -57,7 +57,7 @@ public class TeleOpAutomation extends LinearOpMode {
                 shooter.setVelocityRPM(3100);
             }
             if (gamepad1.x) {
-                //shooter.setVelocityRPM(4000); //setPower(0.7)
+                shooter.setVelocityRPM(4400); //setPower(0.7)
             }
 
 

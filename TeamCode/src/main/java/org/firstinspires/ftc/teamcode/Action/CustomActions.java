@@ -8,7 +8,6 @@ import org.firstinspires.ftc.teamcode.Subsystems.Drive;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.acmerobotics.roadrunner.Action;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class CustomActions {
     Shooter shooter = Shooter.instance;
@@ -54,10 +53,28 @@ public class CustomActions {
         }
     };
 
-    public Action shootMiddle = new Action() {
+    public Action shootFront = new Action() {
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
             shooter.setVelocityRPM(3100);
+
+            return !shooter.isVelReached;
+        }
+    };
+    public Action shootMiddle = new Action() {
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            shooter.setVelocityRPM(3600);
+
+            return !shooter.isVelReached;
+        }
+    };
+
+
+    public Action shootBack = new Action() {
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            shooter.setVelocityRPM(4600);
 
             return !shooter.isVelReached;
         }
