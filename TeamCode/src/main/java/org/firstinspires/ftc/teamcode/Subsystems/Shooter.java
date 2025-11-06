@@ -1,17 +1,21 @@
 package org.firstinspires.ftc.teamcode.Subsystems;
 
 
+import android.health.connect.datatypes.units.Velocity;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
 public class Shooter {
 
-
     public static Shooter instance;
+    public State state = State.REST;
+    public boolean isTargetReached = false;
     public DcMotorEx ShooterMotorLeft;
     public DcMotorEx ShooterMotorRight;
     DcMotorEx motorExLeft;
@@ -22,7 +26,7 @@ public class Shooter {
     public static final double NEW_F = 0.000357;
     PIDFCoefficients pidfNew = new PIDFCoefficients(NEW_P, NEW_I, NEW_D, NEW_F);
 
-    public Shooter (HardwareMap hardwareMap){
+    public Shooter(HardwareMap hardwareMap) {
         ShooterMotorLeft = hardwareMap.get(DcMotorEx.class, "ShooterMotorLeft");
         ShooterMotorRight = hardwareMap.get(DcMotorEx.class, "ShooterMotorRight");
         ShooterMotorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -31,7 +35,7 @@ public class Shooter {
         //ShooterMotorRight.setDirection(DcMotorSimple.Direction.REVERSE);
         ShooterMotorLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         //ShooterMotorRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        ShooterMotorLeft.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER,pidfNew);
+        ShooterMotorLeft.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfNew);
         instance = this;
     }
 
@@ -43,16 +47,49 @@ public class Shooter {
         //ShooterMotorRight.setVelocity(targetVelocityTPS);
     }
 
-    public void stopMotor(){
+    public void stopMotor() {
         ShooterMotorLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         ShooterMotorLeft.setPower(0.0);
         //ShooterMotorRight.setPower(0.0);
     }
 
-    public void setPower(){
+    public void setPower() {
         ShooterMotorLeft.setPower(0.75);
     }
 
+    public enum State {
+        CLOSE,
+        FAR,
+        REST
+    }
+
+    public void update() {
+        switch (state) {
+            case CLOSE:
+                ShooterMotorLeft.setVelocity(3100);
+                ShooterMotorRight.setVelocity(3100);
+                break;
+            case FAR:
+                ShooterMotorLeft.setVelocity(3600);
+                ShooterMotorRight.setVelocity(3600);
+                break;
+            case REST:
+                ShooterMotorLeft.setPower(0);
+                ShooterMotorRight.setPower(0);
+                break;
+        }
+
+        if (state == Shooter.State.CLOSE && ShooterMotorRight.getVelocity() == 3100) {
+            isTargetReached = true;
+        } else if (state == Shooter.State.FAR && ShooterMotorRight.getVelocity() == 3600) {
+            isTargetReached = true;
+        } else if (state == Shooter.State.REST && ShooterMotorRight.getPower() == 0) {
+            isTargetReached = true;
+        } else {
+            isTargetReached = false;
+        }
+
 
     }
+}
 

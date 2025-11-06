@@ -47,18 +47,23 @@ public class TeleOpAutomation extends LinearOpMode {
 
             //shooter
             if (gamepad1.a) {
-                shooter.stopMotor();
+                //shooter.stopMotor();
+                shooter.state = Shooter.State.REST;
             }
             if (gamepad1.b) {
-                shooter.setVelocityRPM(3600);//setPower(0.47)
+                //shooter.setVelocityRPM(3600); //setPower(0.47)
+                shooter.state = Shooter.State.FAR;
 
             }
             if (gamepad1.y) {
-                shooter.setVelocityRPM(3100);
+                //shooter.setVelocityRPM(3100);
+                shooter.state = Shooter.State.CLOSE;
             }
             if (gamepad1.x) {
                 //shooter.setVelocityRPM(4000); //setPower(0.7)
             }
+
+
 
 
             telemetry.addData("Shooter Power For Left Motor:", shooter.ShooterMotorLeft.getVelocity());
