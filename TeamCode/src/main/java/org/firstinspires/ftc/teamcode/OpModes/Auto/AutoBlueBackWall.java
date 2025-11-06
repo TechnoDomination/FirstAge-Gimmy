@@ -16,12 +16,13 @@ import org.firstinspires.ftc.teamcode.Action.CustomActions;
 import org.firstinspires.ftc.teamcode.Subsystems.Hopper;
 import org.firstinspires.ftc.teamcode.Subsystems.Shooter;
 
-@Autonomous(name = "AutoRedGoal", group = "Auto")
-public class AutoStartRedGoal extends LinearOpMode {
+@Autonomous(name = "AutoBlueBackWall", group = "Auto")
+public class AutoBlueBackWall extends LinearOpMode {
+
     @Override
     public void runOpMode() {
 
-        Localizer localizer = new Localizer(hardwareMap, new Poses(47.7, 55.8, PI*0.0));
+        Localizer localizer = new Localizer(hardwareMap, new Poses(0, 0, PI*0.0));
         Drive drive = new Drive(hardwareMap);
         Shooter shooter = new Shooter(hardwareMap);
         Hopper hopper = new Hopper(hardwareMap);
@@ -47,26 +48,28 @@ public class AutoStartRedGoal extends LinearOpMode {
                             return true;
                         },
 
-
                         new SequentialAction(
-                                customActions.shootFront,
-                                new SleepAction(1),
-                                Positions.ShootingPositionsRed.runToExact,
+                                customActions.shootMiddle,
+                                new SleepAction(2),
+                                Positions.MoveForward.runToExact,
                                 customActions.stopDrive,
-                                new SleepAction(3),
+                                new SleepAction(1),
+                                Positions.TurningBlue.runToExact,
+                                customActions.stopDrive,
+                                new SleepAction(1),
                                 customActions.hopperUp,
                                 new SleepAction(1),
                                 customActions.hopperDown,
-                                new SleepAction(2),
+                                new SleepAction(1),
                                 customActions.hopperUp,
                                 new SleepAction(1),
                                 customActions.hopperDown,
-                                new SleepAction(2),
+                                new SleepAction(1),
                                 customActions.hopperUp,
                                 new SleepAction(1),
                                 customActions.hopperDown,
-                                new SleepAction(2),
-                                Positions.ParkPositionsRed.runToExact,
+                                new SleepAction(1),
+                                Positions.EndingBlue.runToExact,
                                 customActions.stopDrive,
                                 customActions.stopShooter
                         )
