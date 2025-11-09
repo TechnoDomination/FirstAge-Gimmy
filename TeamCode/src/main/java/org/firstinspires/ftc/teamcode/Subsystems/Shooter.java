@@ -60,7 +60,10 @@ public class Shooter {
     public enum State {
         CLOSE,
         FAR,
-        REST
+        REST,
+        SHOOTMID,
+        SHOOTMIDBLUE,
+        SHOOTBACK
     }
 
     public void update() {
@@ -73,6 +76,15 @@ public class Shooter {
                 break;
             case REST:
                 ShooterMotorLeft.setPower(0);
+                break;
+            case SHOOTMID:
+                setVelocityRPM(3400);
+                break;
+            case SHOOTMIDBLUE:
+                setVelocityRPM(3200);
+                break;
+            case SHOOTBACK:
+                setVelocityRPM(4600);
                 break;
         }
 

@@ -56,7 +56,7 @@ public class CustomActions {
     public Action shootFront = new Action() {
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-            shooter.setVelocityRPM(3100);
+            shooter.state = Shooter.State.CLOSE;
 
             return !shooter.isVelReached;
         }
@@ -64,7 +64,7 @@ public class CustomActions {
     public Action shootMiddle = new Action() {
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-            shooter.setVelocityRPM(3400);
+            shooter.state = Shooter.State.SHOOTMID;
 
             return !shooter.isVelReached;
         }
@@ -73,7 +73,7 @@ public class CustomActions {
     public Action shootMiddleBlue = new Action() {
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-            shooter.setVelocityRPM(3200);
+            shooter.state = Shooter.State.SHOOTMIDBLUE;
 
             return !shooter.isVelReached;
         }
@@ -83,7 +83,7 @@ public class CustomActions {
     public Action shootBack = new Action() {
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-            shooter.setVelocityRPM(4600);
+            shooter.state = Shooter.State.SHOOTBACK;
 
             return !shooter.isVelReached;
         }
@@ -92,7 +92,16 @@ public class CustomActions {
     public Action stopShooter = new Action() {
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-            shooter.stopMotor();
+            shooter.state = Shooter.State.REST;
+
+            return !shooter.isVelReached;
+        }
+    };
+
+    public Action startFlyWheel = new Action() {
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            shooter.state = Shooter.State.CLOSE;
 
             return !shooter.isVelReached;
         }
