@@ -41,6 +41,8 @@ public class TeleOpAutomation extends LinearOpMode {
             shooter.update();
             telemetry.update();
 
+            shooter.state = Shooter.State.CLOSE;
+
 
             //drive
             drive.update(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);

@@ -98,13 +98,5 @@ public class CustomActions {
         }
     };
 
-    public Action startFlyWheel = new Action() {
-        @Override
-        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-            shooter.state = Shooter.State.CLOSE;
-
-            return !shooter.isVelReached;
-        }
-    };
 
 }
