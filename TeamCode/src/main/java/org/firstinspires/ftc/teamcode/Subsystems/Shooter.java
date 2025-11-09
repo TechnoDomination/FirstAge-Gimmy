@@ -66,24 +66,21 @@ public class Shooter {
     public void update() {
         switch (state) {
             case CLOSE:
-                ShooterMotorLeft.setVelocity(3100);
-                ShooterMotorRight.setVelocity(3100);
+                setVelocityRPM(3100);
                 break;
             case FAR:
-                ShooterMotorLeft.setVelocity(3600);
-                ShooterMotorRight.setVelocity(3600);
+                setVelocityRPM(3600);
                 break;
             case REST:
                 ShooterMotorLeft.setPower(0);
-                ShooterMotorRight.setPower(0);
                 break;
         }
 
-        if (state == Shooter.State.CLOSE && ShooterMotorRight.getVelocity() == 3100) {
+        if (state == Shooter.State.CLOSE && ShooterMotorLeft.getVelocity() == 3100) {
             isTargetReached = true;
-        } else if (state == Shooter.State.FAR && ShooterMotorRight.getVelocity() == 3600) {
+        } else if (state == Shooter.State.FAR && ShooterMotorLeft.getVelocity() == 3600) {
             isTargetReached = true;
-        } else if (state == Shooter.State.REST && ShooterMotorRight.getPower() == 0) {
+        } else if (state == Shooter.State.REST && ShooterMotorLeft.getPower() == 0) {
             isTargetReached = true;
         } else {
             isTargetReached = false;

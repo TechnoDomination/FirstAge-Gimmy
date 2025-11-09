@@ -64,7 +64,16 @@ public class CustomActions {
     public Action shootMiddle = new Action() {
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-            shooter.setVelocityRPM(3600);
+            shooter.setVelocityRPM(3400);
+
+            return !shooter.isVelReached;
+        }
+    };
+
+    public Action shootMiddleBlue = new Action() {
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            shooter.setVelocityRPM(3200);
 
             return !shooter.isVelReached;
         }
