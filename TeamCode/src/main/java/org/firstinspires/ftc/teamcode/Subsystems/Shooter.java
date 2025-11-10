@@ -14,7 +14,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Shooter {
 
     public static Shooter instance;
-    public State state = State.REST;
+    public State state = State.CLOSE;
     public boolean isTargetReached = false;
     public DcMotorEx ShooterMotorLeft;
     public DcMotorEx ShooterMotorRight;

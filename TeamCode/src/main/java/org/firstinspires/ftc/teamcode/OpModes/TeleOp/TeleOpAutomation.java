@@ -15,13 +15,15 @@ import org.firstinspires.ftc.teamcode.Subsystems.Shooter;
 public class TeleOpAutomation extends LinearOpMode {
 
 
-    double motorMaxRPM = 6000;
+    /*double motorMaxRPM = 6000;
     double ticksPerRev = 28;
     double desiredRPM;
     double velocityB = 0;
     double velocityA;
     double velocityY;
-    double velocityX;
+    double velocityX;*/
+
+    boolean isStarted = false;
 
 
     @Override
@@ -41,8 +43,11 @@ public class TeleOpAutomation extends LinearOpMode {
             shooter.update();
             telemetry.update();
 
-            shooter.state = Shooter.State.CLOSE;
-
+            /*if (!isStarted){
+                isStarted = true;
+                hopper.state = Hopper.State.REST;
+                shooter.state = Shooter.State.CLOSE;
+            }*/
 
             //drive
             drive.update(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
@@ -54,7 +59,7 @@ public class TeleOpAutomation extends LinearOpMode {
                 shooter.state = Shooter.State.REST;
             }
             if (gamepad1.b) {
-                //shooter.setVelocityRPM(3600); //setPower(0.47)
+                //shooter.setVelocityRPM(2000); //setPower(0.47)
                 shooter.state = Shooter.State.FAR;
 
             }
@@ -63,7 +68,7 @@ public class TeleOpAutomation extends LinearOpMode {
                 shooter.state = Shooter.State.CLOSE;
             }
             if (gamepad1.x) {
-                //shooter.setVelocityRPM(4400); //setPower(0.7)
+                shooter.setVelocityRPM(1000); //setPower(0.7)
             }
 
 
@@ -72,6 +77,7 @@ public class TeleOpAutomation extends LinearOpMode {
             telemetry.addData("Shooter Power For Left Motor:", shooter.ShooterMotorLeft.getVelocity());
             telemetry.addData("Shooter Power For Right Motor:", shooter.ShooterMotorRight.getVelocity());
             telemetry.addData("Left PIDFCoeff : ", shooter.ShooterMotorLeft.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER));
+            telemetry.addData("State Shooter:" , shooter.state);
             telemetry.update();
             //hopper
             if (gamepad1.right_bumper) {
