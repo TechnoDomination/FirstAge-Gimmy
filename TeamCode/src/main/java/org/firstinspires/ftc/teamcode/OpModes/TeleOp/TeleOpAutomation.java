@@ -81,7 +81,7 @@ public class TeleOpAutomation extends LinearOpMode {
             telemetry.update();
             //hopper
             if (gamepad1.right_bumper) {
-                if (shooter.state == Shooter.State.CLOSE) {
+                if (shooter.state == Shooter.State.CLOSE || shooter.state == Shooter.State.FAR) {
                     hopper.state = Hopper.State.UP;
                 }
             }
