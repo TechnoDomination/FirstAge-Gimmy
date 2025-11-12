@@ -60,7 +60,7 @@ public class TeleOpAutomation extends LinearOpMode {
             }
             if (gamepad1.b) {
                 //shooter.setVelocityRPM(2000); //setPower(0.47)
-                shooter.state = Shooter.State.FAR;
+                shooter.state = Shooter.State.MIDDLE;
 
             }
             if (gamepad1.y) {
@@ -68,7 +68,7 @@ public class TeleOpAutomation extends LinearOpMode {
                 shooter.state = Shooter.State.CLOSE;
             }
             if (gamepad1.x) {
-                shooter.setVelocityRPM(1000); //setPower(0.7)
+               shooter.state = Shooter.State.FAR; //setPower(0.7)
             }
 
 
@@ -81,7 +81,7 @@ public class TeleOpAutomation extends LinearOpMode {
             telemetry.update();
             //hopper
             if (gamepad1.right_bumper) {
-                if (shooter.state == Shooter.State.CLOSE || shooter.state == Shooter.State.FAR) {
+                if (shooter.state == Shooter.State.CLOSE || shooter.state == Shooter.State.FAR || shooter.state == Shooter.State.MIDDLE) {
                     hopper.state = Hopper.State.UP;
                 }
             }

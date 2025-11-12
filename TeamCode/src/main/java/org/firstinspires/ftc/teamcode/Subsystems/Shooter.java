@@ -1,14 +1,11 @@
 package org.firstinspires.ftc.teamcode.Subsystems;
 
 
-import android.health.connect.datatypes.units.Velocity;
-
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
-import com.qualcomm.robotcore.hardware.Servo;
 
 
 public class Shooter {
@@ -59,6 +56,7 @@ public class Shooter {
 
     public enum State {
         CLOSE,
+        MIDDLE,
         FAR,
         REST,
         SHOOTMID,
@@ -71,9 +69,11 @@ public class Shooter {
             case CLOSE:
                 setVelocityRPM(3100);
                 break;
-            case FAR:
+            case MIDDLE:
                 setVelocityRPM(3600);
                 break;
+            case FAR:
+                setVelocityRPM(4600);
             case REST:
                 ShooterMotorLeft.setPower(0);
                 break;
@@ -90,7 +90,7 @@ public class Shooter {
 
         if (state == Shooter.State.CLOSE && ShooterMotorLeft.getVelocity() == 3100) {
             isTargetReached = true;
-        } else if (state == Shooter.State.FAR && ShooterMotorLeft.getVelocity() == 3600) {
+        } else if (state == Shooter.State.MIDDLE && ShooterMotorLeft.getVelocity() == 3600) {
             isTargetReached = true;
         } else if (state == Shooter.State.REST && ShooterMotorLeft.getPower() == 0) {
             isTargetReached = true;
