@@ -37,10 +37,12 @@ public class CustomActions {
 
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-            hopper.state = Hopper.State.UP;
+            if (shooter.state == Shooter.State.CLOSE || shooter.state == Shooter.State.SHOOTMID || shooter.state == Shooter.State.SHOOTMIDBLUE || shooter.state == Shooter.State.SHOOTBACK) {
+                hopper.state = Hopper.State.UP;
+            }
+                return !hopper.isTargetReached;
+            }
 
-            return !hopper.isTargetReached;
-        }
     };
 
     public Action hopperDown = new Action() {
