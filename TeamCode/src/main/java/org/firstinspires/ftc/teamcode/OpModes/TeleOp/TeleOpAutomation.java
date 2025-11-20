@@ -1,11 +1,14 @@
 package org.firstinspires.ftc.teamcode.OpModes.TeleOp;
 
 
+import com.acmerobotics.roadrunner.SequentialAction;
+import com.acmerobotics.roadrunner.SleepAction;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 
+import org.firstinspires.ftc.teamcode.Action.CustomActions;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive;
 import org.firstinspires.ftc.teamcode.Subsystems.Hopper;
 import org.firstinspires.ftc.teamcode.Subsystems.Shooter;
@@ -33,6 +36,7 @@ public class TeleOpAutomation extends LinearOpMode {
         Drive drive = new Drive(hardwareMap);
         Shooter shooter = new Shooter(hardwareMap);
         Hopper hopper = new Hopper(hardwareMap);
+        CustomActions customActions = new CustomActions(hardwareMap);
 
 
 
@@ -42,6 +46,7 @@ public class TeleOpAutomation extends LinearOpMode {
             hopper.update();
             shooter.update();
             telemetry.update();
+            customActions.update();
 
             /*if (!isStarted){
                 isStarted = true;
@@ -50,7 +55,7 @@ public class TeleOpAutomation extends LinearOpMode {
             }*/
 
             //drive
-            drive.update(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+            drive.update(-gamepad1.left_stick_y * 0.75, gamepad1.left_stick_x * 0.75, gamepad1.right_stick_x * 0.75);
 
 
             //shooter
@@ -80,17 +85,30 @@ public class TeleOpAutomation extends LinearOpMode {
             telemetry.addData("State Shooter:" , shooter.state);
             telemetry.update();
             //hopper
-            if (gamepad1.right_bumper) {
-                if (shooter.state == Shooter.State.CLOSE || shooter.state == Shooter.State.FAR || shooter.state == Shooter.State.MIDDLE) {
-                    hopper.state = Hopper.State.UP;
-                }
-            }
             if (gamepad1.left_bumper) {
                 hopper.state = Hopper.State.DOWN;
             }
 
 
+            if (gamepad1.right_bumper) {
+                if (shooter.state == Shooter.State.CLOSE || shooter.state == Shooter.State.MIDDLE) {
+                    //shooter.ShooterMotorLeft.getVelocity() > 1000
+                    hopper.state = Hopper.State.UP;
+            /*new SequentialAction(
+                        customActions.hopperUp,
+                        new SleepAction(0.5),
+                        customActions.hopperDown
+                );
+*/
+                }
+
+            }
             telemetry.addData("Hopper: ", hopper.getHopperTelemetry());
         }
+
+
+        //Automations
+
+        }
     }
-}
+

@@ -8,6 +8,8 @@ import com.acmerobotics.roadrunner.SleepAction;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
 import org.firstinspires.ftc.teamcode.GoBildaPinPointOdo.Localizer;
 import org.firstinspires.ftc.teamcode.GoBildaPinPointOdo.Poses;
 import org.firstinspires.ftc.teamcode.Positions;
@@ -28,7 +30,7 @@ public class AutoBlueBackWall extends LinearOpMode {
         Hopper hopper = new Hopper(hardwareMap);
         CustomActions customActions = new CustomActions(hardwareMap);
 
-        customActions.update();
+      //  customActions.update();
 
         waitForStart();
 
@@ -42,6 +44,11 @@ public class AutoBlueBackWall extends LinearOpMode {
                             telemetry.addData("X pos", Localizer.pose.getX());
                             telemetry.addData("Y pos", Localizer.pose.getY());
                             telemetry.addData("Heading pos",- Localizer.pose.getHeading());
+                            telemetry.addData("Shooter Power For Left Motor:", shooter.ShooterMotorLeft.getVelocity());
+                            telemetry.addData("Shooter Power For Right Motor:", shooter.ShooterMotorRight.getVelocity());
+                            telemetry.addData("Left PIDFCoeff : ", shooter.ShooterMotorLeft.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER));
+                            telemetry.addData("State Shooter:" , shooter.state);
+                            telemetry.update();
                             //for(String string: customActions.getTelemetry()) telemetry.addLine(string);
                             telemetry.update();
 

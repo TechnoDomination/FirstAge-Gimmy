@@ -28,7 +28,7 @@ public class AutoRedBackWall extends LinearOpMode {
         Hopper hopper = new Hopper(hardwareMap);
         CustomActions customActions = new CustomActions(hardwareMap);
 
-        customActions.update();
+       // customActions.update();
 
         waitForStart();
 

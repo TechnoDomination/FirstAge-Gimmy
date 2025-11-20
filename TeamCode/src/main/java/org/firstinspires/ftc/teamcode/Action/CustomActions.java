@@ -21,6 +21,7 @@ public class CustomActions {
 
     public void update() {
         hopper.update();
+        shooter.update();
     }
 
     public Action stopDrive = new Action() {
@@ -60,7 +61,7 @@ public class CustomActions {
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
             shooter.state = Shooter.State.CLOSE;
 
-            return !shooter.isVelReached;
+            return !shooter.isTargetReached;
         }
     };
     public Action shootMiddle = new Action() {
@@ -77,7 +78,7 @@ public class CustomActions {
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
             shooter.state = Shooter.State.SHOOTMIDBLUE;
 
-            return !shooter.isVelReached;
+            return !shooter.isTargetReached;
         }
     };
 

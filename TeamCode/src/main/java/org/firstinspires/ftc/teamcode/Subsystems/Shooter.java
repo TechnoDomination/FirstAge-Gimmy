@@ -15,6 +15,10 @@ public class Shooter {
     public boolean isTargetReached = false;
     public DcMotorEx ShooterMotorLeft;
     public DcMotorEx ShooterMotorRight;
+    public int closePos = 3100;
+    public int middlePos = 3600;
+    public int farPos = 4600;
+
     DcMotorEx motorExLeft;
     public boolean isVelReached = true;
     public static final double NEW_P = 50.0;
@@ -67,10 +71,10 @@ public class Shooter {
     public void update() {
         switch (state) {
             case CLOSE:
-                setVelocityRPM(3100);
+                setVelocityRPM(closePos);
                 break;
             case MIDDLE:
-                setVelocityRPM(3600);
+                setVelocityRPM(middlePos);
                 break;
             case FAR:
                 setVelocityRPM(4600);
@@ -88,11 +92,17 @@ public class Shooter {
                 break;
         }
 
-        if (state == Shooter.State.CLOSE && ShooterMotorLeft.getVelocity() == 3100) {
+        if (state == Shooter.State.CLOSE && ShooterMotorLeft.getVelocity() > 1000) {
             isTargetReached = true;
-        } else if (state == Shooter.State.MIDDLE && ShooterMotorLeft.getVelocity() == 3600) {
+        } else if (state == Shooter.State.MIDDLE && ShooterMotorLeft.getVelocity() > 1000) {
             isTargetReached = true;
         } else if (state == Shooter.State.REST && ShooterMotorLeft.getPower() == 0) {
+            isTargetReached = true;
+        } else if (state == State.SHOOTMIDBLUE && ShooterMotorLeft.getVelocity() > 1000) {
+            isTargetReached = true;
+        } else if (state == State.SHOOTMID && ShooterMotorLeft.getVelocity() > 1000) {
+            isTargetReached = true;
+        } else if (state == State.SHOOTBACK && ShooterMotorLeft.getVelocity() > 1000) {
             isTargetReached = true;
         } else {
             isTargetReached = false;
