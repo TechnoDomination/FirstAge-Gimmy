@@ -8,18 +8,33 @@ import com.acmerobotics.roadrunner.Vector2d;
 import org.firstinspires.ftc.teamcode.GoBildaPinPointOdo.Angle;
 import org.firstinspires.ftc.teamcode.GoBildaPinPointOdo.Localizer;
 import org.firstinspires.ftc.teamcode.GoBildaPinPointOdo.Poses;
+import org.firstinspires.ftc.teamcode.Positions;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive;
 
 //RR - Actions
 public class P2P implements Action {
     Vector2d targetVector;
     double rotation;
+    double maxTime;
+    double driveSpeed;
     Poses robotPosition;
     public boolean isTargetReached;
 
-    public P2P(Vector2d vector2d, double rotation2d) {
+    public P2P(Vector2d vector2d, Double rotation) {
         this.targetVector = vector2d;
-        this.rotation = rotation2d;
+        this.rotation = rotation;
+    }
+
+    public P2P(Vector2d vector2d, Double rotation, Double driveSpeed) {
+        this.targetVector = vector2d;
+        this.rotation = rotation;
+        this.driveSpeed = driveSpeed;
+    }
+    public P2P(Vector2d vector2d, Double rotation, Double driveSpeed, Double maxTime) {
+        this.targetVector = vector2d;
+        this.rotation = rotation;
+        this.driveSpeed = driveSpeed;
+        this.maxTime = maxTime;
     }
 
 
@@ -47,6 +62,8 @@ public class P2P implements Action {
         motorController.BackLeftDCMotor.setPower(rotY - rotX + turn);
         motorController.FrontRightDCMotor.setPower(rotY - rotX - turn);
         motorController.BackRightDCMotor.setPower(rotY + rotX - turn);
+
+
 
         //checking if it has reached the point
         return !(

@@ -49,7 +49,15 @@ public class AutoStartRedGoal extends LinearOpMode {
 
 
                         new SequentialAction(
-                                customActions.shootFront,
+                                Positions.RedIntakeTape1Start.runToExact,
+                                customActions.stopDrive,
+                                /*new SleepAction(driveTime),
+                                 customActions.slowIntake,
+                                 customActions.timerReset,*/
+                                Positions.RedIntakeTape1End.runToExact,
+                                customActions.stopDrive
+
+                                /*customActions.shootFront,
                                 new SleepAction(1),
                                 Positions.ShootingPositionsRed.runToExact,
                                 customActions.stopDrive,
@@ -68,7 +76,7 @@ public class AutoStartRedGoal extends LinearOpMode {
                                 new SleepAction(2),
                                 Positions.ParkPositionsRed.runToExact,
                                 customActions.stopDrive,
-                                customActions.stopShooter
+                                customActions.stopShooter*/
                         )
                 )
         );
